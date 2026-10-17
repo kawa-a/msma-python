@@ -9,3 +9,19 @@ build/
 dist/
 .coverage
 htmlcov/
+
+# Local numerical diagnostics
+sparse_pca_trace/
+*_trace_result.txt
+
+# Local test reports
+pytest_results*.txt
+r_python_regression_results*.txt
+
+# Locally packaged fixture archives
+r_v4_golden_fixtures.zip
+
+# Distribution files
+dist/
+build/
+*.egg-info/
