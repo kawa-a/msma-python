@@ -1,0 +1,2 @@
+component 1 post-deflation max diff 5.3290705182007514e-15
+FIRST DIFFERENCE 2 1 {'raw_w': np.float64(9.306444503920378e-14), 'norm_w': np.float64(0.37680127274917286), 'sparse_w': np.float64(0.15967704139040503), 'w': np.float64(0.4032634748842232), 's': np.float64(0.7982622402607643)}

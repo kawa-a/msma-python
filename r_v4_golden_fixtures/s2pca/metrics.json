@@ -1,0 +1,12 @@
+{
+  "case": "s2pca",
+  "rss": 8.5764472820152514e+02,
+  "aic": 2.6875263728794482e+02,
+  "bic": 3.6840462617000617e+02,
+  "ebic": 3.7578238507823403e+02,
+  "overlap_all": 1.25e-01,
+  "overlap_selected": 1.3513513513513514e-01,
+  "extracted_components": 6,
+  "requested_components": 6,
+  "tolerance": 9.9999999999999998e-13
+}

@@ -1,0 +1,177 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\kawaa\Downloads\msma-python\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\kawaa\Downloads\msma-python
+configfile: pyproject.toml
+collecting ... collected 10 items
+
+tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[s4pca] PASSED [ 10%]
+tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[s2pca] PASSED [ 20%]
+tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[sstspca] FAILED [ 30%]
+tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[sparse_pca] FAILED [ 40%]
+tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[exclusive] PASSED [ 50%]
+tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[no_sparsity] PASSED [ 60%]
+tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[without_z] FAILED [ 70%]
+tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[components_1] PASSED [ 80%]
+tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[components_2] PASSED [ 90%]
+tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[components_4] PASSED [100%]
+
+================================== FAILURES ===================================
+___________ test_python_reference_matches_r_golden_fixture[sstspca] ___________
+
+row = {'case': 'sstspca', 'comp': '6', 'lambda_x': '0.2', 'gamma_x': '0.1', ...}
+
+    @pytest.mark.parametrize("row", manifest_rows(), ids=lambda row: row["case"])
+    def test_python_reference_matches_r_golden_fixture(row):
+        case_dir = FIXTURE_DIR / row["case"]
+        X = load_csv(FIXTURE_DIR / "input_X.csv")
+        z = load_vector(FIXTURE_DIR / "input_z.csv") if row["use_z"].upper() == "TRUE" else None
+        initial_score = load_vector(case_dir / "initial_score.csv")
+        expected_W = load_csv(case_dir / "expected_loadings.csv")
+        expected_S = load_csv(case_dir / "expected_scores.csv")
+        expected_zero_mask = load_csv(case_dir / "expected_zero_mask.csv", dtype=float).astype(bool)
+        expected_used = load_vector(case_dir / "used_indices_python.csv", dtype=int)
+        with (case_dir / "metrics.json").open(encoding="utf-8") as stream:
+            metrics = json.load(stream)
+    
+        result = fit_s4pca_reference(
+            X,
+            z,
+            n_components=int(row["comp"]),
+            lambda_x=float(row["lambda_x"]),
+            gamma_x=float(row["gamma_x"]),
+            history_method="sumabs",
+            mu_x=float(row["mu_x"]),
+            hard_exclusion=row["hard_exclusion"].upper() == "TRUE",
+            n_iter=int(row["n_iter"]),
+            initial_score=initial_score,
+        )
+    
+>       np.testing.assert_allclose(result.loadings, expected_W, rtol=0.0, atol=1e-12)
+E       AssertionError: 
+E       Not equal to tolerance rtol=0, atol=1e-12
+E       
+E       Mismatched elements: 36 / 240 (15%)
+E       First 5 mismatches are at indices:
+E        [17, 3]: 0.37990597285641275 (ACTUAL), 0.0 (DESIRED)
+E        [17, 4]: -0.0 (ACTUAL), 0.37768101882222 (DESIRED)
+E        [18, 3]: -0.40015702836221967 (ACTUAL), 0.0 (DESIRED)
+E        [18, 4]: 0.0 (ACTUAL), -0.423031198155126 (DESIRED)
+E        [19, 3]: -0.3962865925508331 (ACTUAL), 0.0 (DESIRED)
+E       Max absolute difference among violations: 1.
+E       Max relative difference among violations: 1.
+E        ACTUAL: array([[-0.272383, -0.      , -0.      ,  0.      , -0.      , -0.      ],
+E              [ 0.40731 ,  0.      ,  0.      , -0.      , -0.      ,  0.      ],
+E              [ 0.346003,  0.      , -0.      , -0.      ,  0.      , -0.      ],...
+E        DESIRED: array([[-0.272383,  0.      ,  0.      ,  0.      ,  0.      ,  0.      ],
+E              [ 0.40731 ,  0.      ,  0.      ,  0.      ,  0.      ,  0.      ],
+E              [ 0.346003,  0.      ,  0.      ,  0.      ,  0.      ,  0.      ],...
+
+tests\regression\test_r_golden_fixtures.py:58: AssertionError
+_________ test_python_reference_matches_r_golden_fixture[sparse_pca] __________
+
+row = {'case': 'sparse_pca', 'comp': '6', 'lambda_x': '0.2', 'gamma_x': '0', ...}
+
+    @pytest.mark.parametrize("row", manifest_rows(), ids=lambda row: row["case"])
+    def test_python_reference_matches_r_golden_fixture(row):
+        case_dir = FIXTURE_DIR / row["case"]
+        X = load_csv(FIXTURE_DIR / "input_X.csv")
+        z = load_vector(FIXTURE_DIR / "input_z.csv") if row["use_z"].upper() == "TRUE" else None
+        initial_score = load_vector(case_dir / "initial_score.csv")
+        expected_W = load_csv(case_dir / "expected_loadings.csv")
+        expected_S = load_csv(case_dir / "expected_scores.csv")
+        expected_zero_mask = load_csv(case_dir / "expected_zero_mask.csv", dtype=float).astype(bool)
+        expected_used = load_vector(case_dir / "used_indices_python.csv", dtype=int)
+        with (case_dir / "metrics.json").open(encoding="utf-8") as stream:
+            metrics = json.load(stream)
+    
+        result = fit_s4pca_reference(
+            X,
+            z,
+            n_components=int(row["comp"]),
+            lambda_x=float(row["lambda_x"]),
+            gamma_x=float(row["gamma_x"]),
+            history_method="sumabs",
+            mu_x=float(row["mu_x"]),
+            hard_exclusion=row["hard_exclusion"].upper() == "TRUE",
+            n_iter=int(row["n_iter"]),
+            initial_score=initial_score,
+        )
+    
+>       np.testing.assert_allclose(result.loadings, expected_W, rtol=0.0, atol=1e-12)
+E       AssertionError: 
+E       Not equal to tolerance rtol=0, atol=1e-12
+E       
+E       Mismatched elements: 37 / 240 (15.4%)
+E       First 5 mismatches are at indices:
+E        [17, 2]: 0.37111322259376067 (ACTUAL), 0.0 (DESIRED)
+E        [17, 5]: 0.0 (ACTUAL), -0.363876022890562 (DESIRED)
+E        [18, 2]: -0.3953752110975498 (ACTUAL), 0.0 (DESIRED)
+E        [18, 5]: 0.0 (ACTUAL), 0.41702489021561 (DESIRED)
+E        [19, 2]: -0.39865113303099237 (ACTUAL), 0.0 (DESIRED)
+E       Max absolute difference among violations: 1.21586934
+E       Max relative difference among violations: 3.10975812
+E        ACTUAL: array([[-0.272383, -0.      ,  0.      ,  0.      ,  0.      ,  0.      ],
+E              [ 0.40731 ,  0.      , -0.      , -0.      ,  0.      ,  0.      ],
+E              [ 0.346003,  0.      ,  0.      ,  0.      , -0.      ,  0.      ],...
+E        DESIRED: array([[-0.272383,  0.      ,  0.      ,  0.      ,  0.      ,  0.      ],
+E              [ 0.40731 ,  0.      ,  0.      ,  0.      ,  0.      ,  0.      ],
+E              [ 0.346003,  0.      ,  0.      ,  0.      ,  0.      ,  0.      ],...
+
+tests\regression\test_r_golden_fixtures.py:58: AssertionError
+__________ test_python_reference_matches_r_golden_fixture[without_z] __________
+
+row = {'case': 'without_z', 'comp': '4', 'lambda_x': '0.2', 'gamma_x': '0.1', ...}
+
+    @pytest.mark.parametrize("row", manifest_rows(), ids=lambda row: row["case"])
+    def test_python_reference_matches_r_golden_fixture(row):
+        case_dir = FIXTURE_DIR / row["case"]
+        X = load_csv(FIXTURE_DIR / "input_X.csv")
+        z = load_vector(FIXTURE_DIR / "input_z.csv") if row["use_z"].upper() == "TRUE" else None
+        initial_score = load_vector(case_dir / "initial_score.csv")
+        expected_W = load_csv(case_dir / "expected_loadings.csv")
+        expected_S = load_csv(case_dir / "expected_scores.csv")
+        expected_zero_mask = load_csv(case_dir / "expected_zero_mask.csv", dtype=float).astype(bool)
+        expected_used = load_vector(case_dir / "used_indices_python.csv", dtype=int)
+        with (case_dir / "metrics.json").open(encoding="utf-8") as stream:
+            metrics = json.load(stream)
+    
+        result = fit_s4pca_reference(
+            X,
+            z,
+            n_components=int(row["comp"]),
+            lambda_x=float(row["lambda_x"]),
+            gamma_x=float(row["gamma_x"]),
+            history_method="sumabs",
+            mu_x=float(row["mu_x"]),
+            hard_exclusion=row["hard_exclusion"].upper() == "TRUE",
+            n_iter=int(row["n_iter"]),
+            initial_score=initial_score,
+        )
+    
+>       np.testing.assert_allclose(result.loadings, expected_W, rtol=0.0, atol=1e-12)
+E       AssertionError: 
+E       Not equal to tolerance rtol=0, atol=1e-12
+E       
+E       Mismatched elements: 22 / 160 (13.8%)
+E       First 5 mismatches are at indices:
+E        [17, 3]: 0.37990597285641275 (ACTUAL), 0.0 (DESIRED)
+E        [18, 3]: -0.40015702836221967 (ACTUAL), 0.0 (DESIRED)
+E        [19, 3]: -0.3962865925508331 (ACTUAL), 0.0 (DESIRED)
+E        [20, 3]: 0.2833960379628621 (ACTUAL), 0.0 (DESIRED)
+E        [21, 3]: 0.3393348113524139 (ACTUAL), 0.0 (DESIRED)
+E       Max absolute difference among violations: 0.85854322
+E       Max relative difference among violations: 1.
+E        ACTUAL: array([[-0.272383, -0.      , -0.      ,  0.      ],
+E              [ 0.40731 ,  0.      ,  0.      , -0.      ],
+E              [ 0.346003,  0.      , -0.      , -0.      ],...
+E        DESIRED: array([[-0.272383,  0.      ,  0.      ,  0.      ],
+E              [ 0.40731 ,  0.      ,  0.      ,  0.      ],
+E              [ 0.346003,  0.      ,  0.      ,  0.      ],...
+
+tests\regression\test_r_golden_fixtures.py:58: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[sstspca]
+FAILED tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[sparse_pca]
+FAILED tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[without_z]
+========================= 3 failed, 7 passed in 1.31s =========================

@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "msma"
+version = "0.1.0rc1"
+description = "Sparse and supervised multivariable analysis with an R-compatible S4PCA reference engine"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "GPL-2.0-or-later"
+license-files = ["LICENSE"]
+authors = [{name = "Atsushi Kawaguchi"}]
+keywords = ["PCA", "sparse PCA", "supervised PCA", "multiblock analysis", "S4PCA"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = ["numpy>=1.26,<3", "scikit-learn>=1.5,<2"]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+dataframe = ["pandas>=2.2"]
+dev = ["build>=1.2", "mypy>=1.11", "pytest>=8", "pytest-cov>=5", "ruff>=0.6", "twine>=5"]
+
+[project.urls]
+Homepage = "https://github.com/kawa-a/msma-python"
+Repository = "https://github.com/kawa-a/msma-python"
+Issues = "https://github.com/kawa-a/msma-python/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true

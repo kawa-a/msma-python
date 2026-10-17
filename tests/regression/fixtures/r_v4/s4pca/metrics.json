@@ -1,0 +1,12 @@
+{
+  "case": "s4pca",
+  "rss": 9.5729275516114171e+02,
+  "aic": 2.9299658552964286e+02,
+  "bic": 4.1118847931999466e+02,
+  "ebic": 4.1856623822822252e+02,
+  "overlap_all": 2.9999999999999999e-01,
+  "overlap_selected": 3.1578947368421051e-01,
+  "extracted_components": 6,
+  "requested_components": 6,
+  "tolerance": 9.9999999999999998e-13
+}

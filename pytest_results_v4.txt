@@ -1,0 +1,56 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\kawaa\Downloads\msma-python\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\kawaa\Downloads\msma-python
+configfile: pyproject.toml
+testpaths: tests
+collecting ... collected 42 items
+
+tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[s4pca] PASSED [  2%]
+tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[s2pca] PASSED [  4%]
+tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[sstspca] XFAIL [  7%]
+tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[sparse_pca] XFAIL [  9%]
+tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[exclusive] PASSED [ 11%]
+tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[no_sparsity] PASSED [ 14%]
+tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[without_z] XFAIL [ 16%]
+tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[components_1] PASSED [ 19%]
+tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[components_2] PASSED [ 21%]
+tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[components_4] PASSED [ 23%]
+tests/test_model_selection.py::test_selection_grid_and_refit PASSED      [ 26%]
+tests/test_model_selection.py::test_selection_reproducibility PASSED     [ 28%]
+tests/test_model_selection.py::test_repeat_identifiers_and_no_refit PASSED [ 30%]
+tests/test_model_selection.py::test_summary_and_json_compatible_results PASSED [ 33%]
+tests/test_model_selection.py::test_invalid_controls[alpha-0] PASSED     [ 35%]
+tests/test_model_selection.py::test_invalid_controls[alpha-1] PASSED     [ 38%]
+tests/test_model_selection.py::test_invalid_controls[n_repeats-0] PASSED [ 40%]
+tests/test_model_selection.py::test_invalid_controls[calibration_fraction-0] PASSED [ 42%]
+tests/test_model_selection.py::test_invalid_controls[calibration_fraction-1] PASSED [ 45%]
+tests/test_model_selection.py::test_invalid_overlap PASSED               [ 47%]
+tests/test_msma_api.py::test_explicit_s4pca_dispatch PASSED              [ 50%]
+tests/test_msma_api.py::test_auto_structured_dispatch PASSED             [ 52%]
+tests/test_msma_api.py::test_exclusive_alias PASSED                      [ 54%]
+tests/test_msma_api.py::test_future_paths_fail_explicitly PASSED         [ 57%]
+tests/test_msma_api.py::test_invalid_analysis PASSED                     [ 59%]
+tests/test_reference_compatibility_api.py::test_low_level_regression_api_is_preserved PASSED [ 61%]
+tests/test_s4pca.py::test_fit_shapes_and_diagnostics PASSED              [ 64%]
+tests/test_s4pca.py::test_reconstruction_shapes_and_scales PASSED        [ 66%]
+tests/test_s4pca.py::test_exclusive_prevents_reuse PASSED                [ 69%]
+tests/test_s4pca.py::test_reproducible_with_python_random_state PASSED   [ 71%]
+tests/test_s4pca.py::test_invalid_inputs PASSED                          [ 73%]
+tests/test_s4pca.py::test_near_zero_initialization_diagnostics_detect_reference_instability PASSED [ 76%]
+tests/test_s4pca.py::test_supervision_avoids_near_zero_second_component_initialization PASSED [ 78%]
+tests/test_s4pca.py::test_get_summary_is_json_compatible PASSED          [ 80%]
+tests/test_s4pca.py::test_summary_contains_core_sections PASSED          [ 83%]
+tests/test_s4pca.py::test_summary_reports_near_zero_initialization PASSED [ 85%]
+tests/test_s4pca.py::test_summary_rejects_unfitted_estimator PASSED      [ 88%]
+tests/test_s4pca.py::test_summary_rejects_invalid_precision[0] PASSED    [ 90%]
+tests/test_s4pca.py::test_summary_rejects_invalid_precision[-1] PASSED   [ 92%]
+tests/test_s4pca.py::test_summary_rejects_invalid_precision[1.5] PASSED  [ 95%]
+tests/test_s4pca.py::test_summary_rejects_invalid_precision[True] PASSED [ 97%]
+tests/test_s4pca.py::test_summary_rejects_invalid_detailed PASSED        [100%]
+
+=========================== short test summary info ===========================
+XFAIL tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[sstspca] - Known reference-algorithm sensitivity: after projection deflation, the next unsupervised loading candidate is nearly zero; normalizing it amplifies BLAS/platform rounding differences in later sparse components.
+XFAIL tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[sparse_pca] - Known reference-algorithm sensitivity: after projection deflation, the next unsupervised loading candidate is nearly zero; normalizing it amplifies BLAS/platform rounding differences in later sparse components.
+XFAIL tests/regression/test_r_golden_fixtures.py::test_python_reference_matches_r_golden_fixture[without_z] - Known reference-algorithm sensitivity: after projection deflation, the next unsupervised loading candidate is nearly zero; normalizing it amplifies BLAS/platform rounding differences in later sparse components.
+======================== 39 passed, 3 xfailed in 1.41s ========================

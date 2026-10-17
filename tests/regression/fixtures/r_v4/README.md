@@ -1,0 +1,1 @@
+Run `tools/r/generate_s4pca_golden_fixtures.R` to populate this directory. Generated numeric fixtures should be reviewed and committed before release. Until `manifest.csv` exists, the Python golden-regression test is skipped.

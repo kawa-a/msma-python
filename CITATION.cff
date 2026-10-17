@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use msma-python, cite the software and the corresponding R msma methodology."
+title: "msma-python"
+type: software
+version: "0.1.0rc1"
+authors:
+  - family-names: "Kawaguchi"
+    given-names: "Atsushi"
+repository-code: "https://github.com/kawa-a/msma-python"
+license: "GPL-2.0-or-later"

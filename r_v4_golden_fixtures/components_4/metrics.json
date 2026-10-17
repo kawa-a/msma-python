@@ -1,0 +1,12 @@
+{
+  "case": "components_4",
+  "rss": 1.4621421794925507e+03,
+  "aic": 2.9276273290298832e+02,
+  "bic": 3.7387481687675916e+02,
+  "ebic": 3.8125257578498702e+02,
+  "overlap_all": 7.4999999999999997e-02,
+  "overlap_selected": 9.375e-02,
+  "extracted_components": 4,
+  "requested_components": 4,
+  "tolerance": 9.9999999999999998e-13
+}
